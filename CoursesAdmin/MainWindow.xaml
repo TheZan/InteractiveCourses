@@ -1,0 +1,25 @@
+﻿<Window x:Class="CoursesAdmin.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CoursesAdmin"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Interactive Courses Admin Panel" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None"  Height="600" Width="960">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Rectangle Height="20" MouseLeftButtonDown="topPanel_MouseLeftButtonDown"  x:Name="topPanel" Grid.Row="0" Fill="#F1F1F1"></Rectangle>
+        <StackPanel Grid.ColumnSpan="3" HorizontalAlignment="Right" Grid.Row="0" Orientation="Horizontal">
+            <Button Click="topBanelButton"  x:Name="minimize" Style="{StaticResource topButtonStyle}">
+                <Image Source="Assets/window-minimize.png"></Image>
+            </Button>
+            <Button Click="topBanelButton" x:Name="close" Style="{StaticResource topButtonCloseStyle}">
+                <Image Source="Assets/window-close.png"></Image>
+            </Button>
+        </StackPanel>
+    </Grid>
+</Window>
