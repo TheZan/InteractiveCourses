@@ -15,13 +15,8 @@ namespace Courses.Page
         public Main()
         {
             InitializeComponent();
-            List<module> modules = GetProducts();
+            List<module> modules = db.module.ToList();
             lv.ItemsSource = modules;
-        }
-
-        private List<module> GetProducts()
-        {
-            return db.module.ToList();
         }
 
         private void ListViewItem_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
