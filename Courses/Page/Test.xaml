@@ -1,0 +1,54 @@
+﻿<UserControl x:Class="Courses.Page.Test"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Courses.Page" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d" 
+             d:DesignHeight="520" d:DesignWidth="750">
+    <Grid x:Name="main">
+        <StackPanel>
+            <TextBlock TextWrapping="Wrap" Margin="5" x:Name="groupTitle" Text="{Binding questionText}" FontSize="24"></TextBlock>
+            <ListBox VerticalAlignment="Center" x:Name="answerBox" FontFamily="Arial" FontSize="20" Margin="0,2" ItemsSource="{Binding}" HorizontalAlignment="Left">
+                <ListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                    <StackPanel x:Name="listItem">
+                                        <TextBlock Margin="3" TextWrapping="Wrap" Text="{Binding answerText}"/>
+                                    </StackPanel>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter TargetName="listItem" Property="Background" Value="#F1F1F1"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListBoxItem_PreviewMouseLeftButtonDown" />
+                    </Style>
+                </ListBox.ItemContainerStyle>
+            </ListBox>
+            <TextBlock x:Name="messageError" Visibility="Collapsed" HorizontalAlignment="Center" FontSize="18" FontFamily="Arial" Foreground="Red" Text="Выбран неверный ответ!"></TextBlock>
+        </StackPanel>
+        <materialDesign:DialogHost IsOpen="False" x:Name="dialogEnd" Identifier="endTesting">
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Margin="20">
+                    <Grid.RowDefinitions>
+                        <RowDefinition></RowDefinition>
+                        <RowDefinition></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <StackPanel Grid.Row="0">
+                        <TextBlock Margin="5" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Green" FontSize="20" Text="Поздравляем! Вы разблокировали достижение!"/>
+                        <Image x:Name="badgeImage" HorizontalAlignment="Center" Margin="5" Source="{Binding badgeImage}"></Image>
+                    </StackPanel>
+                    <StackPanel HorizontalAlignment="Center" Grid.Row="1" Orientation="Horizontal">
+                        <Button Click="goMain_Click" x:Name="goMain" Margin="5" Content="На главную"></Button>
+                        <Button Click="goProfile_Click" x:Name="goProfile" Margin="5" Content="В профиль"></Button>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
+    </Grid>
+</UserControl>
