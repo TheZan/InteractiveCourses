@@ -31,3 +31,5 @@ C:\Users\Zan\source\repos\Courses\CoursesAdmin\obj\Debug\Page\MainPage.g.cs
 C:\Users\Zan\source\repos\Courses\CoursesAdmin\obj\Debug\Page\MainPage.baml
 C:\Users\Zan\source\repos\Courses\CoursesAdmin\obj\Debug\Page\AddSubmodule.g.cs
 C:\Users\Zan\source\repos\Courses\CoursesAdmin\obj\Debug\Page\AddSubmodule.baml
+C:\Users\Zan\source\repos\Courses\CoursesAdmin\obj\Debug\Page\AddQuestion.g.cs
+C:\Users\Zan\source\repos\Courses\CoursesAdmin\obj\Debug\Page\AddQuestion.baml

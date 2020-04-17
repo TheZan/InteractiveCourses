@@ -83,7 +83,23 @@ namespace CoursesAdmin.Page
 						description = descriptionModule,
 						moduleImage = imageArray
 					};
+					
+					test addTest = new test
+					{
+						testName = moduleName.Text,
+						moduleId = addModule.moduleId
+					};
+
+					badge addBadge = new badge
+					{
+						badgeName = moduleName.Text,
+						badgeImage = imageArray,
+						moduleId = addModule.moduleId
+					};
+
 					db.module.Add(addModule);
+					db.test.Add(addTest);
+					db.badge.Add(addBadge);
 					db.SaveChanges();
 				}
 			}

@@ -14,7 +14,7 @@
                 <RowDefinition Height="5"></RowDefinition>
                 <RowDefinition Height="73*"></RowDefinition>
                 <RowDefinition Height="5"></RowDefinition>
-                <RowDefinition Height="54"></RowDefinition>
+                <RowDefinition Height="150"></RowDefinition>
             </Grid.RowDefinitions>
             <Rectangle Grid.Row="1" Fill="#F1F1F1"></Rectangle>
             <Rectangle Grid.Row="3" Fill="#F1F1F1"></Rectangle>
@@ -73,7 +73,7 @@
             </StackPanel>
             <StackPanel Grid.Row="2">
                 <TextBlock Margin="2" FontWeight="Medium" x:Name="moduleName" Text="Разделы модуля - "></TextBlock>
-                <ListBox VerticalAlignment="Top" x:Name="submodule" FontFamily="Arial" FontSize="15" Margin="2" ItemsSource="{Binding}" Height="209">
+                <ListBox VerticalAlignment="Top" x:Name="submodule" FontFamily="Arial" FontSize="15" Margin="2" ItemsSource="{Binding}" Height="169">
                     <ListBox.ContextMenu>
                         <ContextMenu>
                             <MenuItem x:Name="addSubmodule" Click="contextSubmodule_Click"  Header="Добавить" Background="WhiteSmoke" />
@@ -104,14 +104,22 @@
             </StackPanel>
             <StackPanel Grid.Row="4">
                 <TextBlock Margin="2" FontWeight="Medium" x:Name="testModuleName" Text="Тест модуля -"></TextBlock>
-                <ListBox VerticalAlignment="Top" x:Name="testModule" FontFamily="Arial" FontSize="15" Margin="2" ItemsSource="{Binding}" Height="32">
+                <ListBox ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" VerticalAlignment="Top" x:Name="testModule" FontFamily="Arial" FontSize="15" Margin="2" ItemsSource="{Binding}" Height="128">
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem x:Name="addQuestion" Click="contextQuestion_Click"  Header="Добавить" Background="WhiteSmoke" />
+                            <MenuItem x:Name="deleteQuestion" Click="contextQuestion_Click" Header="Удалить" Background="WhiteSmoke" />
+                            <MenuItem x:Name="editQuestion" Click="contextQuestion_Click"  Header="Изменить" Background="WhiteSmoke" />
+                            <MenuItem x:Name="editAnswer" Click="contextQuestion_Click"  Header="Редактировать ответы" Background="WhiteSmoke" />
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type ListBoxItem}">
                                         <StackPanel x:Name="listItem">
-                                            <TextBlock Foreground="Black" Margin="3" TextWrapping="Wrap" Text="{Binding testName}"/>
+                                            <TextBlock Foreground="Black" Margin="3" TextWrapping="Wrap" Text="{Binding questionText}"/>
                                         </StackPanel>
                                         <ControlTemplate.Triggers>
                                             <Trigger Property="IsMouseOver" Value="True">
@@ -121,10 +129,21 @@
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
+                            <EventSetter Event="PreviewMouseRightButtonDown" Handler="ListBoxItem_PreviewMouseRightButtonDown_1"></EventSetter>
                         </Style>
                     </ListBox.ItemContainerStyle>
                 </ListBox>
             </StackPanel>
         </Grid>
+        <materialDesign:DialogHost IsOpen="False" x:Name="dialogQuestion" Identifier="editQuestion">
+            <materialDesign:DialogHost.DialogContent>
+                <Grid Margin="20">
+                    <StackPanel>
+                        <TextBox x:Name="questionText" Margin="10" materialDesign:HintAssist.Hint="Вопрос" Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontFamily="Champagne &amp; Limousines" FontSize="18"/>
+                        <Button Click="addEditButton_Click" Margin="10" x:Name="addEditButton" Content="Добавить"></Button>
+                    </StackPanel>
+                </Grid>
+            </materialDesign:DialogHost.DialogContent>
+        </materialDesign:DialogHost>
     </Grid>
 </UserControl>
