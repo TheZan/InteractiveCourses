@@ -101,6 +101,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Page\AddSubmodule.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Page\MainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -113,6 +117,9 @@
   <ItemGroup>
     <Compile Include="Page\AddModule.xaml.cs">
       <DependentUpon>AddModule.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Page\AddSubmodule.xaml.cs">
+      <DependentUpon>AddSubmodule.xaml</DependentUpon>
     </Compile>
     <Compile Include="Page\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>

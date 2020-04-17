@@ -29,3 +29,5 @@ C:\Users\Zan\source\repos\Courses\CoursesAdmin\obj\Debug\Page\AddModule.g.cs
 C:\Users\Zan\source\repos\Courses\CoursesAdmin\obj\Debug\Page\AddModule.baml
 C:\Users\Zan\source\repos\Courses\CoursesAdmin\obj\Debug\Page\MainPage.g.cs
 C:\Users\Zan\source\repos\Courses\CoursesAdmin\obj\Debug\Page\MainPage.baml
+C:\Users\Zan\source\repos\Courses\CoursesAdmin\obj\Debug\Page\AddSubmodule.g.cs
+C:\Users\Zan\source\repos\Courses\CoursesAdmin\obj\Debug\Page\AddSubmodule.baml

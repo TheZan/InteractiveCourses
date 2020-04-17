@@ -21,13 +21,13 @@
             <StackPanel Grid.Row="0">
                 <TextBlock Margin="2" FontWeight="Medium" Text="Модули"></TextBlock>
                 <ListView ItemsSource="{Binding module}" x:Name="lv" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="305">
-                    <ListView.Resources>
-                        <ContextMenu x:Key="ItemContextMenu">
-                            <MenuItem x:Name="addModule" Click="contextModule_Click" Header="Добавить" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}" Background="WhiteSmoke" />
-                            <MenuItem x:Name="deleteModule" Click="contextModule_Click" Header="Удалить" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}" Background="WhiteSmoke" />
-                            <MenuItem x:Name="editModule" Click="contextModule_Click"  Header="Изменить" Command="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=ListView}}" Background="WhiteSmoke" />
+                    <ListView.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem x:Name="addModule" Click="contextModule_Click" Header="Добавить" Background="WhiteSmoke" />
+                            <MenuItem x:Name="deleteModule" Click="contextModule_Click" Header="Удалить" Background="WhiteSmoke" />
+                            <MenuItem x:Name="editModule" Click="contextModule_Click"  Header="Изменить" Background="WhiteSmoke" />
                         </ContextMenu>
-                    </ListView.Resources>
+                    </ListView.ContextMenu>
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="3"></UniformGrid>
@@ -59,7 +59,6 @@
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
-                            <Setter Property="ContextMenu" Value="{StaticResource ItemContextMenu}" />
                             <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
                             <EventSetter Event="PreviewMouseRightButtonDown" Handler="ListViewItem_PreviewMouseRightButtonDown"></EventSetter>
                             <Style.Triggers>
@@ -75,6 +74,13 @@
             <StackPanel Grid.Row="2">
                 <TextBlock Margin="2" FontWeight="Medium" x:Name="moduleName" Text="Разделы модуля - "></TextBlock>
                 <ListBox VerticalAlignment="Top" x:Name="submodule" FontFamily="Arial" FontSize="15" Margin="2" ItemsSource="{Binding}" Height="209">
+                    <ListBox.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem x:Name="addSubmodule" Click="contextSubmodule_Click"  Header="Добавить" Background="WhiteSmoke" />
+                            <MenuItem x:Name="deleteSubmodule" Click="contextSubmodule_Click" Header="Удалить" Background="WhiteSmoke" />
+                            <MenuItem x:Name="editSubmodule" Click="contextSubmodule_Click"  Header="Изменить" Background="WhiteSmoke" />
+                        </ContextMenu>
+                    </ListBox.ContextMenu>
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Setter Property="Template">
@@ -91,6 +97,7 @@
                                     </ControlTemplate>
                                 </Setter.Value>
                             </Setter>
+                            <EventSetter Event="PreviewMouseRightButtonDown" Handler="ListBoxItem_PreviewMouseRightButtonDown"></EventSetter>
                         </Style>
                     </ListBox.ItemContainerStyle>
                 </ListBox>

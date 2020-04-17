@@ -25,13 +25,13 @@ namespace CoursesAdmin.Page
         List<module> modules;
         List<submodule> submodules;
         List<test> tests;
-        int moduleID;
+        int moduleID, submoduleID;
         public MainPage()
         {
             InitializeComponent();
             db = new CoursesContext();
-            int firstModuleId = db.module.Select(p => p.moduleId).FirstOrDefault();
-            StartProgramm(firstModuleId);
+            moduleID = db.module.Select(p => p.moduleId).FirstOrDefault();
+            StartProgramm(moduleID);
         }
 
         private void StartProgramm(int moduleId)
@@ -61,8 +61,8 @@ namespace CoursesAdmin.Page
                 {
                     try
                     {
-                        int moduleId = fam.moduleId;
-                        StartProgramm(moduleId);
+                        moduleID = fam.moduleId;
+                        StartProgramm(moduleID);
                     }
                     catch { }
                 }
@@ -91,20 +91,26 @@ namespace CoursesAdmin.Page
             switch ((sender as MenuItem).Name)
             {
                 case "deleteModule":
-                    db = new CoursesContext();
-                    module modules = new module
+                    if (moduleID != 0)
                     {
-                        moduleId = moduleID
-                    };
-                    db.module.Attach(modules);
-                    db.module.Remove(modules);
-                    db.SaveChanges();
-                    StartProgramm(db.module.Select(p => p.moduleId).FirstOrDefault());
+                        db = new CoursesContext();
+                        module modules = new module
+                        {
+                            moduleId = moduleID
+                        };
+                        db.module.Attach(modules);
+                        db.module.Remove(modules);
+                        db.SaveChanges();
+                        StartProgramm(db.module.Select(p => p.moduleId).FirstOrDefault());
+                    }
                     break;
 
                 case "editModule":
-                    main.Children.Clear();
-                    main.Children.Add(new AddModule(moduleID));
+                    if (moduleID != 0)
+                    {
+                        main.Children.Clear();
+                        main.Children.Add(new AddModule(moduleID));
+                    }
                     break;
 
                 case "addModule":
@@ -114,6 +120,60 @@ namespace CoursesAdmin.Page
 
                 default:
                     break;
+            }
+        }
+
+        private void contextSubmodule_Click(object sender, RoutedEventArgs e)
+        {
+            switch ((sender as MenuItem).Name)
+            {
+                case "deleteSubmodule":
+                    if (submoduleID != 0)
+                    {
+                        db = new CoursesContext();
+                        submodule submodules = new submodule
+                        {
+                            submoduleId = submoduleID
+                        };
+                        db.submodule.Attach(submodules);
+                        db.submodule.Remove(submodules);
+                        db.SaveChanges();
+                        StartProgramm(db.module.Select(p => p.moduleId).FirstOrDefault());
+                    }
+                    break;
+
+                case "editSubmodule":
+                    if (submoduleID != 0)
+                    {
+                        main.Children.Clear();
+                        main.Children.Add(new AddSubmodule(submoduleID));
+                    }
+                    break;
+
+                case "addSubmodule":
+                    main.Children.Clear();
+                    main.Children.Add(new AddSubmodule(moduleID, ""));
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+        private void ListBoxItem_PreviewMouseRightButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            ListBoxItem lbi = sender as ListBoxItem;
+            if (lbi != null)
+            {
+                submodule fam = lbi.DataContext as submodule;
+                if (fam != null)
+                {
+                    try
+                    {
+                        submoduleID = fam.submoduleId;
+                    }
+                    catch { }
+                }
             }
         }
     }
