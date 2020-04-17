@@ -3,7 +3,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Windows.Media.Imaging;
 
-namespace Courses.Class
+namespace CoursesAdmin.Class
 {
     class ConvertToImage
     {

@@ -10,14 +10,8 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"></RowDefinition>
-            <RowDefinition Height="103*"></RowDefinition>
-            <RowDefinition Height="5"></RowDefinition>
-            <RowDefinition Height="73*"></RowDefinition>
-            <RowDefinition Height="5"></RowDefinition>
-            <RowDefinition Height="54*"></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Rectangle Grid.Row="2" Fill="#F1F1F1"></Rectangle>
-        <Rectangle Grid.Row="4" Fill="#F1F1F1"></Rectangle>
         <Rectangle MouseLeftButtonDown="topPanel_MouseLeftButtonDown"  x:Name="topPanel" Grid.Row="0" Fill="#F1F1F1"/>
         <StackPanel HorizontalAlignment="Right" Grid.Row="0" Orientation="Horizontal" Width="40">
             <Button Click="topBanelButton"  x:Name="minimize" Style="{StaticResource topButtonStyle}">
@@ -27,79 +21,6 @@
                 <Image Source="Assets/window-close.png"></Image>
             </Button>
         </StackPanel>
-        <StackPanel Grid.Row="1">
-            <TextBlock Text="Модули"></TextBlock>
-            <ListView ItemsSource="{Binding module}" x:Name="lv" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Auto" Height="224">
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <UniformGrid Columns="3"></UniformGrid>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <Border Margin="10" Width="150" Height="200">
-                            <StackPanel>
-                                <Border Width="50" Height="50" CornerRadius="5" Margin="5">
-                                    <Border.Effect>
-                                        <DropShadowEffect ShadowDepth="1"/>
-                                    </Border.Effect>
-                                    <Border.Background>
-                                        <ImageBrush ImageSource="{Binding moduleImage}"/>
-                                    </Border.Background>
-                                </Border>
-                                <TextBlock TextAlignment="Center" TextWrapping="Wrap" Margin="5 0" Text="{Binding moduleName}" FontSize="12"/>
-                            </StackPanel>
-                        </Border>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                    <ContentPresenter />
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                        <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
-                        <Style.Triggers>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Cursor" Value="Hand"></Setter>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </ListView.ItemContainerStyle>
-            </ListView>
-            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                <Button Margin="0,0,5,0" Content="Добавить модуль..."></Button>
-                <Button Margin="5,0,0,0" Content="Удалить модуль..."></Button>
-            </StackPanel>
-        </StackPanel>
-        <StackPanel Grid.Row="3">
-            <TextBlock x:Name="moduleName" Text="Разделы модуля - "></TextBlock>
-            <ListBox VerticalAlignment="Top" x:Name="submodule" FontFamily="Arial" FontSize="15" Margin="2" ItemsSource="{Binding}" Height="152">
-                <ListBox.ItemContainerStyle>
-                    <Style TargetType="ListBoxItem">
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type ListBoxItem}">
-                                    <StackPanel x:Name="listItem">
-                                        <TextBlock Foreground="Black" Margin="3" TextWrapping="Wrap" Text="{Binding submoduleName}"/>
-                                    </StackPanel>
-                                    <ControlTemplate.Triggers>
-                                        <Trigger Property="IsMouseOver" Value="True">
-                                            <Setter TargetName="listItem" Property="Background" Value="#F1F1F1"/>
-                                        </Trigger>
-                                    </ControlTemplate.Triggers>
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListBox.ItemContainerStyle>
-            </ListBox>
-        </StackPanel>
-        <StackPanel Grid.Row="5">
-            <TextBlock Text="Тест модуля -"></TextBlock>
-        </StackPanel>
+        <Grid Grid.Row="1" x:Name="main"></Grid>
     </Grid>
 </Window>
