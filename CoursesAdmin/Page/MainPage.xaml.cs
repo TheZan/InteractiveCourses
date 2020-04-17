@@ -127,47 +127,50 @@ namespace CoursesAdmin.Page
 
         private void contextQuestion_Click(object sender, RoutedEventArgs e)
         {
-            switch ((sender as MenuItem).Name)
+            if (moduleID != 0)
             {
-                case "deleteQuestion":
-                    if (questionID != 0)
-                    {
-                        db = new CoursesContext();
-                        question questions = new question
+                switch ((sender as MenuItem).Name)
+                {
+                    case "deleteQuestion":
+                        if (questionID != 0)
                         {
-                            questionId = questionID
-                        };
-                        db.question.Attach(questions);
-                        db.question.Remove(questions);
-                        db.SaveChanges();
-                        StartProgramm(db.module.Select(p => p.moduleId).FirstOrDefault());
-                    }
-                    break;
+                            db = new CoursesContext();
+                            question questions = new question
+                            {
+                                questionId = questionID
+                            };
+                            db.question.Attach(questions);
+                            db.question.Remove(questions);
+                            db.SaveChanges();
+                            StartProgramm(db.module.Select(p => p.moduleId).FirstOrDefault());
+                        }
+                        break;
 
-                case "editQuestion":
-                    if (questionID != 0)
-                    {
-                        addEditButton.Content = "Изменить";
-                        questionText.Text = db.question.Where(p => p.questionId == questionID).Select(p => p.questionText).FirstOrDefault();
+                    case "editQuestion":
+                        if (questionID != 0)
+                        {
+                            addEditButton.Content = "Изменить";
+                            questionText.Text = db.question.Where(p => p.questionId == questionID).Select(p => p.questionText).FirstOrDefault();
+                            dialogQuestion.IsOpen = true;
+                        }
+                        break;
+
+                    case "addQuestion":
+                        addEditButton.Content = "Добавить";
                         dialogQuestion.IsOpen = true;
-                    }
-                    break;
+                        break;
 
-                case "addQuestion":
-                    addEditButton.Content = "Добавить";
-                    dialogQuestion.IsOpen = true;
-                    break;
+                    case "editAnswer":
+                        if (questionID != 0)
+                        {
+                            main.Children.Clear();
+                            main.Children.Add(new AddQuestion(questionID));
+                        }
+                        break;
 
-                case "editAnswer":
-                    if (questionID != 0)
-                    {
-                        main.Children.Clear();
-                        main.Children.Add(new AddQuestion(questionID));
-                    }
-                    break;
-
-                default:
-                    break;
+                    default:
+                        break;
+                }
             }
         }
 
@@ -214,38 +217,41 @@ namespace CoursesAdmin.Page
 
         private void contextSubmodule_Click(object sender, RoutedEventArgs e)
         {
-            switch ((sender as MenuItem).Name)
+            if (moduleID != 0)
             {
-                case "deleteSubmodule":
-                    if (submoduleID != 0)
-                    {
-                        db = new CoursesContext();
-                        submodule submodules = new submodule
+                switch ((sender as MenuItem).Name)
+                {
+                    case "deleteSubmodule":
+                        if (submoduleID != 0)
                         {
-                            submoduleId = submoduleID
-                        };
-                        db.submodule.Attach(submodules);
-                        db.submodule.Remove(submodules);
-                        db.SaveChanges();
-                        StartProgramm(db.module.Select(p => p.moduleId).FirstOrDefault());
-                    }
-                    break;
+                            db = new CoursesContext();
+                            submodule submodules = new submodule
+                            {
+                                submoduleId = submoduleID
+                            };
+                            db.submodule.Attach(submodules);
+                            db.submodule.Remove(submodules);
+                            db.SaveChanges();
+                            StartProgramm(db.module.Select(p => p.moduleId).FirstOrDefault());
+                        }
+                        break;
 
-                case "editSubmodule":
-                    if (submoduleID != 0)
-                    {
+                    case "editSubmodule":
+                        if (submoduleID != 0)
+                        {
+                            main.Children.Clear();
+                            main.Children.Add(new AddSubmodule(submoduleID));
+                        }
+                        break;
+
+                    case "addSubmodule":
                         main.Children.Clear();
-                        main.Children.Add(new AddSubmodule(submoduleID));
-                    }
-                    break;
+                        main.Children.Add(new AddSubmodule(moduleID, ""));
+                        break;
 
-                case "addSubmodule":
-                    main.Children.Clear();
-                    main.Children.Add(new AddSubmodule(moduleID, ""));
-                    break;
-
-                default:
-                    break;
+                    default:
+                        break;
+                }
             }
         }
 
