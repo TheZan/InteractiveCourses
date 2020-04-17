@@ -1,18 +1,8 @@
 ﻿using CoursesAdmin.DBModel;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace CoursesAdmin.Page
 {
@@ -35,15 +25,19 @@ namespace CoursesAdmin.Page
         {
             questionName.Text = db.question.Where(p => p.questionId == questionID).Select(p => p.questionText).FirstOrDefault();
             lvAnswer.ItemsSource = db.answer.Where(p => p.questionId == questionID).ToList();
-            var result = (from PR in db.answer
-                          join OD in db.correctAnswer on PR.answerId equals OD.answer
+            if (db.correctAnswer.Where(p => p.question == questionID).Any())
+            {
+                var result = (from PR in db.answer
+                              join OD in db.correctAnswer on PR.answerId equals OD.answer
 
-                          where PR.answerId == OD.answer && OD.question == questionID
-                          select new
-                          {
-                              corectAnswerName = PR.answerText
-                          }).ToList();
-            correctAnswer.Text = $"Правильный ответ - {result[0].corectAnswerName}";
+                              where PR.answerId == OD.answer && OD.question == questionID
+                              select new
+                              {
+                                  corectAnswerName = PR.answerText
+                              }).ToList();
+                correctAnswer.Text = $"Правильный ответ - {result[0].corectAnswerName}";
+            }
+            answerText.Clear();
         }
 
         private void back_Click(object sender, RoutedEventArgs e)

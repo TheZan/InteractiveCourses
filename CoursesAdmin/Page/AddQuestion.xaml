@@ -17,7 +17,7 @@
                 <ListView x:Name="lvAnswer" Height="194">
                     <ListBox.ContextMenu>
                         <ContextMenu>
-                            <MenuItem x:Name="setCorrect" Click="setCorrect_Click"  Header="Добавить" Background="WhiteSmoke" />
+                            <MenuItem x:Name="setCorrect" Click="setCorrect_Click"  Header="Сделать правильным ответом" Background="WhiteSmoke" />
                         </ContextMenu>
                     </ListBox.ContextMenu>
                     <ListBox.ItemContainerStyle>

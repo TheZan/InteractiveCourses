@@ -10,7 +10,8 @@ namespace Courses.DBModel
         public CoursesContext()
             : base("name=CoursesContext")
         {
-            Database.Connection.ConnectionString += @"data source=DESKTOP-9MAURET\SQLEXPRESS;initial catalog=Courses;persist security info=True;user id=courses;password=test;MultipleActiveResultSets=True;App=EntityFramework";
+            Database.Connection.ConnectionString = @"data source=YOUR_SERVER_NAME;initial catalog=Courses;
+            persist security info=True;user id=YOUR_LOGIN;password=YOUR_PASSWORD;MultipleActiveResultSets=True;App=EntityFramework";
         }
 
         public virtual DbSet<answer> answer { get; set; }
